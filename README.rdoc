@@ -1,28 +1,10 @@
-== README
+Prototype of a Finance Tracker app, which will be a social media app in which 
+1. A user can sign up and login/logout.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+2. A user can search for stock from the stock symbols.
 
-Things you may want to cover:
+3. A user can search for friends and can make friendships with them.
 
-* Ruby version
+4. A user can view the stocks of his friends.
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+5. A user can search for his friends from his first name, last name and also from his email
