@@ -1,0 +1,39 @@
+<div id="search-lookup">
+  <h3><strong>Search Stocks</strong></h3>
+  
+  <%= form_tag search_stocks_path, remote: true, method: :get, id:"stock-lookup-form" do %>
+    <div class="form-group no-padding text-center col-md-12 row">
+      <div class="col-md-10">
+        <%= text_field_tag :stock,params[:stock],autofocus:true, placeholder: "Stock Symbol", class:"form-control search-box input-lg" %>
+      </div>	
+      <div class="col-md-2">
+	<%= button_tag(type: :submit, class:"btn btn-primary btn-success btn-lg") do %>
+	  <b class="fa fa-search"></b>&nbsp;Look Up a stock
+	<% end %>
+      </div>
+    </div>
+  <% end %>
+  <%= render 'common/spinner' %>
+  
+  <% if @stock %>
+    <div id="search-lookup-results" class="well results-block">
+      <strong>Symbol:</strong><%= @stock.ticker %>
+      <strong>Name:</strong><%= @stock.name %>
+      <strong>Price:</strong><%= @stock.price %>
+      
+      <% if current_user.can_add_stock?(@stock.ticker) %> 
+        <%= link_to "Add to my stocks", user_stocks_path(user:current_user, ticker: @stock.ticker, stock_id: @stock.id ? @stock.id : ''), class:"btn btn-primary btn-success", method: :post %>
+      <% else %>
+        <div class="label label-default">You can not add this stock because
+        <% if !current_user.stocks_under_limit? %>
+          you have reached your limit to add 10 stocks 
+        <% end %>
+	<% if current_user.stock_already_exists?(@stock.ticker) %>
+	  stock is already added to your profile
+	<% end %>
+	</div>
+      <% end %>
+   </div>
+  <% end %>
+  <div id="search-lookup-errors"></div>
+</div>
