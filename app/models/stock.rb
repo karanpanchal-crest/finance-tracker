@@ -6,7 +6,9 @@ class Stock < ActiveRecord::Base
   def find_by_ticker(ticker_symbol)
     where(ticker: ticker_symbol).first
   end
-  
+  def find_user_stock(user)
+    user_stocks.find_by(user_id: user)
+  end  
   def self.new_from_lookup(ticker_symbol)
     print "Ticker Symbol", ticker_symbol
     looked_up_stock = StockQuote::Stock.quote(ticker_symbol)
